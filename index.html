@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Aniversário, Babae linda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet"> <!-- Fonte coreana para vibe K-drama -->
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <!-- Confetes caindo prototipo pq nao sei se voi colocar imagem de confete ou nao -->
+    <div id="confettiContainer"></div>
+
+    <div class="opening-screen" id="opening">
+        <div class="balloon" onclick="popBalloon(this)"></div>
+        <div class="balloon" onclick="popBalloon(this)"></div>
+        <div class="balloon" onclick="popBalloon(this)"></div>
+        <div class="balloon" onclick="popBalloon(this)"></div>
+        <div class="balloon" onclick="popBalloon(this)"></div>
+        <div class="balloon" onclick="popBalloon(this)"></div>
+        <div class="balloon" onclick="popBalloon(this)"></div>
+        <div class="balloon" onclick="popBalloon(this)"></div>
+        <div class="balloon" onclick="popBalloon(this)"></div>
+        <div class="opening-text">Feliz Aniversário, Babae</div>
+    </div>
+
+    <div class="main-content" id="main">
+        <div class="container">
+            <header>
+                <h1>Feliz Aniversário, Babae linda</h1>
+                <p>Uma jornada romântica inspirada  cheia de amor e  felicidade</p>
+            </header>
+
+            <section class="photo-carousel">
+                <button class="carousel-btn" onclick="prevPhoto()">&#8592;</button>
+                <img src="midias/WhatsApp Image 2025-11-13 at 16.29.12 (1).jpeg " alt="Foto da Babae" class="photo" id="photo">
+                <button class="carousel-btn" onclick="nextPhoto()">&#8594;</button>
+            </section>
+
+            <section class="kdrama-section">
+                <h2>Um Toque de Dorama p</h2>
+                <p class="quote">"O amor verdadeiro é como um dorama mas o meu é maior. Feliz aniversário, Babae!"</p>
+                <iframe src="https://youtube.com/shorts/9A535HegefU?si=tpaO2apZXnSI3h5o" allowfullscreen></iframe>
+            </section>
+
+            <section class="button-section">
+                <button class="surprise-btn" onclick="showMessages()">Surpresa Especial para Babae </button>
+            </section>
+
+            <footer>
+                <p>Feito com o coração cheio de amor,Que seu aniversário seja muito feliz, Babae! ❤️</p>
+            </footer>
+        </div>
+    </div>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div id="messageContainer"></div>
+            <button onclick="closeModal()" style="margin-top: 30px; padding: 15px 30px; background: #e17055; color: white; border: none; border-radius: 10px; font-size: 1.2em;">Fechar e Continuar</button>
+        </div>
+    </div>
+
+    <script>
+        // Confeteeee
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.animationDelay = Math.random() * 5 + 's';
+            document.getElementById('confettiContainer').appendChild(confetti);
+            setTimeout(() => confetti.remove(), 5000);
+        }
+        setInterval(createConfetti, 200);
+
+        // Tela de abertura
+        setTimeout(() => {
+            document.getElementById('opening').style.display = 'none';
+            document.getElementById('main').style.display = 'block';
+        }, 6000);
+
+        // Balões  pra mae tofinga apertar
+        function popBalloon(balloon) {
+            balloon.style.display = 'none';
+            
+            const pop = document.createElement('div');
+            pop.textContent = '💥';
+            pop.style.position = 'absolute';
+            pop.style.left = balloon.offsetLeft + 'px';
+            pop.style.top = balloon.offsetTop + 'px';
+            pop.style.fontSize = '2em';
+            document.getElementById('opening').appendChild(pop);
+            setTimeout(() => pop.remove(), 1000);
+        }
+
+        // Carrossel de fotos
+        const photos = ['midias/WhatsApp Image 2025-11-13 at 16.29.12 (2).jpeg', 'midias/WhatsApp Image 2025-11-13 at 16.29.12.jpeg', '"midias/WhatsApp Image 2025-11-13 at 16.29.12 (1).jpeg"'];
+        let currentPhoto = 0;
+        function nextPhoto() {
+            currentPhoto = (currentPhoto + 1) % photos.length;
+            document.getElementById('photo').src = photos[currentPhoto];
+        }
+        function prevPhoto() {
+            currentPhoto = (currentPhoto - 1 + photos.length) % photos.length;
+            document.getElementById('photo').src = photos[currentPhoto];
+        }
+
+        // Mensagens  de um dorama da babae linda
+        const mensagens = [
+            "Cena 1: Babae, protagonista da minha vida, hoje é seu dia! Que este aniversário seja tão emocionante quanto um dorama coreano. ",
+            "Cena 2: Desejk toda a alegria do mundo",
+            "Cena 3: Desejo que seu roteiro de vida tenha finais felizes,Te amo infinitamente, mamãe",
+            "Cena 4: Que seus dias sejam repletos de paixão, risadas e momentos inesquecíveis. Feliz aniversário mamae",
+            "Final: Babae, você é o amor verdadeiro. Que este ano traga tudo o que seu coração deseja. "
+        ];
+
+        function showMessages() {
+            const container = document.getElementById('messageContainer');
+            container.innerHTML = '';
+            document.getElementById('modal').style.display = 'flex';
+
+            mensagens.forEach((msg, index) => {
+                setTimeout(() => {
+                    const p = document.createElement('p');
+                    p.className = 'message';
+                    p.textContent = msg;
+                    container.appendChild(p);
+                }, index * 2500);
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
